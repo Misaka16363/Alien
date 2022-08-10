@@ -60,6 +60,14 @@ class AlienInvasion:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
+
+    def _check_play_button(self, mouse_pos):
+        """在玩家单击Play按钮时开始游戏"""
+        if self.play_button.rect.collidepoint(mouse_pos):
+            self.stats.game_active = True
 
     def _check_keydown_events(self, event):
         """响应按键按下"""
@@ -118,10 +126,13 @@ class AlienInvasion:
         self._check_fleet_edges()
         self.aliens.update()
 
-        # 检测外星人和飞船之间的碰撞
+        # 检查外星人和飞船之间的碰撞
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
             # print("噢！上帝，你的飞船撞坏了！（叉腰）")
+
+        # 检查是否有外星人到达了屏幕底端
+        self._check_aliens_bottom()
 
     def _create_fleet(self):
         """创建外星人群"""
