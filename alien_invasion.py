@@ -154,7 +154,11 @@ class AlienInvasion:
             # 删除现有子弹并新建一群机器人
             self.bullets.empty()
             self._create_fleet()
-            self.settings.increase_speed()
+            if self.stats.level <= 5:
+                self.settings.increase_speed()
+
+            # 提高等级
+            self.stats.level += 1
 
     def _update_aliens(self):
         """
