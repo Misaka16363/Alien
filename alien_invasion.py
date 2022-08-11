@@ -1,3 +1,4 @@
+from ast import Delete
 import sys
 from time import sleep
 
@@ -58,6 +59,7 @@ class AlienInvasion:
         """响应鼠标和按键事件"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self.stats.save()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
@@ -101,7 +103,12 @@ class AlienInvasion:
             elif event.key == pygame.K_SPACE:
                 self._fire_bullet()
         if event.key == pygame.K_ESCAPE:
+            self.stats.save()
             sys.exit()
+        if not self.stats.game_active:
+            if event.key == pygame.K_INSERT:
+                self.stats.delete()
+                sys.exit()
 
     def _check_keyup_events(self, event):
         """响应按键松开"""

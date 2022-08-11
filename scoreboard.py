@@ -66,6 +66,8 @@ class Scoreboard:
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.prep_high_score()
+        elif self.stats.high_score == 0:
+            self.prep_high_score()
 
     def prep_ships(self):
         """"显示还余下多少飞船"""
