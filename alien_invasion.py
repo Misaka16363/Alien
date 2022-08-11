@@ -1,4 +1,3 @@
-from ast import Delete
 import sys
 from time import sleep
 
