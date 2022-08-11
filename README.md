@@ -8,6 +8,8 @@
 - Esc键可退出游戏
 - 暂停状态下按Insert键重置游戏数据
 
+**去取得最高分吧！（笑）**
+
 3. 游戏结构：< 通过pyinstaller打包后
 *本体：	开始游戏.exe
 *素材：	images/alien.bmp
