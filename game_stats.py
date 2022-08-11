@@ -1,4 +1,4 @@
-from scoreboard import Scoreboard
+from multiprocessing.sharedctypes import Value
 
 
 class GameStats:
@@ -16,8 +16,18 @@ class GameStats:
         self.high_score = 0
         # self.load(self)
         self.filename = 'data'
-        with open(self.filename, 'r') as file_objet:
-            self.high_score = int(file_objet.read())
+        try:
+            with open(self.filename, 'r') as file_objet:
+                try:
+                    score_value = int(file_objet.read())
+                    if score_value == 0:
+                        self.high_score = 0
+                    else:
+                        self.high_score = score_value ^ 200507202208
+                except ValueError:
+                    self.delete()
+        except FileNotFoundError:
+            self.delete()
 
     def reset_stats(self):
         """初始化在游戏运行期间可能变化的统计信息"""
@@ -26,11 +36,15 @@ class GameStats:
 
     def save(self):
         """对最高分进行存储操作"""
-        with open(self.filename, 'w') as file_object:
-            file_object.write(str(self.high_score))
+        if self.high_score == 0:
+            with open(self.filename, 'w') as file_object:
+                file_object.write(str(0))
+        else:
+            with open(self.filename, 'w') as file_object:
+                file_object.write(str((self.high_score) ^ 200507202208))
 
     def delete(self):
         """对最高分进行重置操作"""
         self.high_score = 0
         with open(self.filename, 'w') as file_object:
-            file_object.write(str(0))
+            file_object.write(str(self.high_score))
