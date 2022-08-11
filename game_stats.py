@@ -16,6 +16,9 @@ class GameStats:
         try:
             with open(self.filename, 'r') as file_objet:
                 try:
+                    # 咳咳，这里的加密校验如果被人看到能被笑死
+                    # 这个方法太羞耻了（逃
+                    # 可以给我发个邮件 i@misaka.contact
                     value = int(file_objet.read()) ^ 20220816377
                     if value % 200507202209 != 0:
                         self.delete()
