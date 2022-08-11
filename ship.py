@@ -1,4 +1,5 @@
 import pygame
+import sys
 from pygame.sprite import Sprite
 
 
@@ -13,7 +14,11 @@ class Ship(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
 
         # 加载飞船图像并获取其外接矩形
-        self.image = pygame.image.load('images/ship.bmp')
+        try:
+            self.image = pygame.image.load('images/ship.bmp')
+        except FileNotFoundError:
+            print("缺少文件： 无法找到“ship.bmp”飞船图像文件")
+            sys.exit()
         self.rect = self.image.get_rect()
 
         # 对于每艘新飞船，都将其放在屏幕底部的中央
