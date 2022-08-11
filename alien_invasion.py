@@ -42,9 +42,12 @@ class AlienInvasion:
         # 创建Play按钮
         self.play_button = Button(self, "Play")
 
+        self.clock = pygame.time.Clock()
+
     def run_game(self):
         """开始游戏主循环"""
         while True:
+            self.clock.tick(60)
             self._check_events()
 
             if self.stats.game_active:

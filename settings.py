@@ -23,7 +23,7 @@ class Settings:
         # 加快游戏节奏的速度
         self.speedup_scale = 1.5  # 1.5
         # 外星人分数的提高速度
-        self.score_scale = 1.5
+        self.score_scale = 1.5  # 1.5
 
         self.initialize_dynamic_settings()
 
@@ -32,9 +32,9 @@ class Settings:
 
     def initialize_dynamic_settings(self):
         """"初始化随游戏进行而变化的设置"""
-        self.ship_speed = 1.5  # 1.5
-        self.bullet_speed = 3.0  # 3.0
-        self.alien_speed = 1.0  # 1.0
+        self.ship_speed = 3.0  # 3.0
+        self.bullet_speed = 5.0  # 5.0
+        self.alien_speed = 2.0  # 2.0
 
         # 1 表示向右移 -1 表示向左移
         self.fleet_direction = 1  # 1
