@@ -16,11 +16,13 @@ class GameStats:
         try:
             with open(self.filename, 'r') as file_objet:
                 try:
-                    score_value = int(file_objet.read())
-                    if score_value == 0:
+                    value = int(file_objet.read()) ^ 20220816377
+                    if value % 200507202209 != 0:
+                        self.delete()
+                    elif value == 0:
                         self.high_score = 0
                     else:
-                        self.high_score = score_value ^ 200507202208
+                        self.high_score = int(value / 200507202209)
                 except ValueError:
                     self.delete()
         except FileNotFoundError:
@@ -39,7 +41,8 @@ class GameStats:
                 file_object.write(str(0))
         else:
             with open(self.filename, 'w') as file_object:
-                file_object.write(str((self.high_score) ^ 200507202208))
+                file_object.write(
+                    str(((self.high_score) * 200507202209) ^ 20220816377))
 
     def delete(self):
         """对最高分进行重置操作"""
